@@ -17,7 +17,8 @@ from ssd.utils.dist_util import synchronize
 from ssd.utils.logger import setup_logger
 from ssd.utils.misc import str2bool
 
-
+from ssd.modeling.backbone import build_backbone
+from ssd.modeling.box_head import build_box_head
 def train(cfg, args):
     logger = logging.getLogger('SSD.trainer')
     model = build_detection_model(cfg)
@@ -52,7 +53,7 @@ def main():
     parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Training With PyTorch')
     parser.add_argument(
         "--config-file",
-        default="",
+        default="configs/resnet50_ssd300_voc0712_feature_fusion.yaml",
         metavar="FILE",
         help="path to config file",
         type=str,

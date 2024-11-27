@@ -9,9 +9,10 @@ class BoxPredictor(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         self.cfg = cfg
+        self.BACKBONE_OUT_CHANNELS = [256] * len(cfg.MODEL.PRIORS.FEATURE_MAPS)
         self.cls_headers = nn.ModuleList()
         self.reg_headers = nn.ModuleList()
-        for level, (boxes_per_location, out_channels) in enumerate(zip(cfg.MODEL.PRIORS.BOXES_PER_LOCATION, cfg.MODEL.BACKBONE.OUT_CHANNELS)):
+        for level, (boxes_per_location, out_channels) in enumerate(zip(cfg.MODEL.PRIORS.BOXES_PER_LOCATION, self.BACKBONE_OUT_CHANNELS)):
             self.cls_headers.append(self.cls_block(level, out_channels, boxes_per_location))
             self.reg_headers.append(self.reg_block(level, out_channels, boxes_per_location))
         self.reset_parameters()

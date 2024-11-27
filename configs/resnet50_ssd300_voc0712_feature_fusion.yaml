@@ -1,4 +1,5 @@
 MODEL:
+  DEVICE: "cuda"
   NUM_CLASSES: 21
   BACKBONE:
     NAME: "R50_300"
@@ -19,7 +20,7 @@ MODEL:
 INPUT:
   IMAGE_SIZE: 300
 DATASETS:
-  TRAIN: ("voc_2007_trainval", "voc_2012_trainval")
+  TRAIN: ("voc_2007_trainval", )
   TEST: ("voc_2007_test", )
 SOLVER:
   MAX_ITER: 120000
